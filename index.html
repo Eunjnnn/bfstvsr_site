@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BF-STVSR: B-Splines and Fourier-Best Friends for High Fidelity Spatial-Temporal Video Super-Resolution</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/milk_favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">BF-STVSR: B-Splines and Fourier-Best Friends for High Fidelity Spatial-Temporal Video Super-Resolution</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://eunjnnn.github.io/Portfolio/">Eunjin Kim*</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/hjinnkim">Hyeonjin Kim*</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=aLYNnyoAAAAJ">Kyong Hwan Jin</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.co.kr/citations?hl=en&user=7NBlQw4AAAAJ">Jaejun Yoo</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Ulsan National Institute of Science and Technology (UNIST)</span>
+            <span class="author-block"><sup>2</sup>Korea University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2501.11043"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2501.11043"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#none"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code(Coming Soon)</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/Presentation1.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        BF-STVSR includes two positional embedding for each axis.
+        It captures the high-frequency spatial feature by Fourier Mapper and 
+        interpolates temporal information smoothly via B-spline Mapper.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-book">
+          <video poster="" id="book" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/GOPR0854_11_00_re.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-book">
+          <video poster="" id="book" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/GOPR0854_11_00_re.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Enhancing low-resolution, low-frame-rate videos to high-resolution, high-frame-rate quality is essential for a seamless user experience, 
+            motivating advancements in Continuous Spatial-Temporal Video Super Resolution (C-STVSR).
+            While prior methods employ Implicit Neural Representation (INR) for continuous encoding, 
+            they often struggle to capture the complexity of video data, 
+            relying on simple coordinate concatenation and pre-trained optical flow network for motion representation.
+          </p>
+          <p>
+            Interestingly, we find that adding position encoding, contrary to common observations, 
+            does not improve-and even degrade performance. 
+            This issue becomes particularly pronounced when combined with pre-trained optical flow networks, 
+            which can limit the model's flexibility. 
+            To address these issues, we propose <strong>BF-STVSR</strong>, 
+            a C-STVSR framework with two key modules tailored to better represent spatial and temporal characteristics of video: 
+            1) B-spline Mapper for smooth temporal interpolation, and 2) Fourier Mapper for capturing dominant spatial frequencies. 
+            Our approach achieves state-of-the-art PSNR and SSIM performance, showing enhanced spatial details and natural temporal consistency.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+    <!-- Method. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method</h2>
+
+        <!-- BF-STVSR Overview. -->
+        <h3 class="title is-4">BF-STVSR Overview</h3>
+        <div class="content has-text-justified">
+          <p>
+            First, two input frames are encoded as low-resolution feature maps. 
+            Based on these features, Fourier Mapper predicts the dominant frequency information, 
+            while B-spline Mapper predicts smoothly interpolated motion, which is then processed into optical flows at an arbitrary time t. 
+            The frequency information is temporally propagated by being warped with the optical flows. 
+            Finally, the warped frequency information is decoded to generate high-resolution interpolated RGB frame. 
+          </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/bfstvsr_overview_cropped.png" alt="Dolly Zoom Method" style="height: 100%;">
+        </div>
+        <br/>
+        <!--/ BF-STVSR Overview. -->
+
+        <!-- BM and FM -->
+        <h3 class="title is-4">B-spline Mapper and Fourier Mapper</h3>
+        <div class="content has-text-justified">
+          <p>
+            (a) Fourier Mapper estimates the dominant frequency and its amplitude to capture fine-detail 
+            information from the given frames. 
+            (b) B-spline Mapper estimates B-spline coefficients to model inherent motion, 
+            which smoothly interpolates motion features temporally.
+          </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/figure_overview_mappers_cropped.png" alt="Dolly Zoom Method" style="height: 100%;">
+        </div>
+        <!--/ BM and FM. -->
+      </div>
+    </div>
+
+    </div>
+    <!--/ Method. -->
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+    <!-- Experiments. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Experiments</h2>
+
+        <!-- Quantitative results. -->
+        <h3 class="title is-4">Quantitative results</h3>
+        <div class="content has-text-justified">
+          <p>
+            Performance comparison on the Fixed-scale STVSR baselines on Vid4, Gopro, and Adobe240 datasets. 
+            Results are evaluated using PSNR (dB) and SSIM metrics. 
+            All frames are interpolated by a factor of ×4 in the spatial axis and ×8 in the temporal axis. 
+            “Average” refers to metrics calculated across all 8 interpolated frames, 
+            while “Center” refers to metrics measured using 1st, 4th and 9th (that is single-frame interpolation) frames of the interpolated sequence. 
+            Red and blue indicate the best and the second best performance, respectively.
+          </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/table1.png" alt="Dolly Zoom Method" style="height: 100%;">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            Performance comparison on the C-STVSR baselines for out-of-distribution scale on Gopro dataset. 
+            Results are evaluated using PSNR (dB) and SSIM metrics. 
+            All frames are interpolated by a scaling factor specified on the table and metrics calculated across all interpolated frames. 
+            Bold indicates the best performance.
+          </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/table2.png" alt="Dolly Zoom Method" style="height: 100%;">
+        </div>
+        <br/>
+        <!--/ Quantitative results. -->
+
+        <!-- Qualitative results. -->
+        <h3 class="title is-4">Qualitative results.</h3>
+        <div class="content has-text-justified">
+          <p>
+            Qualitative comparison on in-distribution scale with ×4 in spatial scale and ×8 in temporal scale, using GoPro dataset.
+          </p>
+        </div>
+        <div class="content has-text-centered video-container">
+          <video id="replay-video-1" autoplay muted loop playsinline >
+            <source src="./static/videos/GOPR0854_11_00_re.mp4" type="video/mp4">
+          </video>
+          <video id="replay-video-2" autoplay muted loop playsinline >
+            <source src="./static/videos/GOPR0869_11_00_re.mp4" type="video/mp4">
+          </video>
+        </div>
+        <!--/ Qualitative results. -->
+
+      </div>
+    </div>
+    <!--/ Experiments. -->
+
+    </div>
+    <!--/ Method. -->
+
+
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{kim2025bf,
+  author    = {Kim, Eunjin and Kim, Hyeonjin and Jin, Kyong Hwan and Yoo, Jaejun},
+  title     = {BF-STVSR: B-Splines and Fourier-Best Friends for High Fidelity Spatial-Temporal Video Super-Resolution},
+  journal   = {arXiv},
+  year      = {2025}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/Eunjnnn" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
