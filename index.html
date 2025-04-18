@@ -143,12 +143,12 @@
               </span> -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="#none"
+                <a href="https://github.com/Eunjnnn/bfstvsr"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code(Coming Soon)</span>
+                  <span>Code</span>
                   </a>
               </span>
               <!-- Dataset Link. -->
@@ -283,10 +283,10 @@
         <h3 class="title is-4">B-spline Mapper and Fourier Mapper</h3>
         <div class="content has-text-justified">
           <p>
-            (a) Fourier Mapper estimates the dominant frequency and its amplitude to capture fine-detail 
+            (a) B-spline Mapper estimates B-spline coefficients to model inherent motion, 
+            which smoothly interpolates motion features temporally. 
+            (b) Fourier Mapper estimates the dominant frequency and its amplitude to capture fine-detail 
             information from the given frames. 
-            (b) B-spline Mapper estimates B-spline coefficients to model inherent motion, 
-            which smoothly interpolates motion features temporally.
           </p>
         </div>
         <div class="columns is-vcentered interpolation-panel">
@@ -316,7 +316,7 @@
         <div class="content has-text-justified">
           <p>
             Performance comparison on the Fixed-scale STVSR baselines on Vid4, Gopro, and Adobe240 datasets. 
-            Results are evaluated using PSNR (dB) and SSIM metrics. 
+            L<sub>RAFT</sub> refers the optical flow supervision. Results are evaluated using PSNR (dB) and SSIM metrics. 
             All frames are interpolated by a factor of ×4 in the spatial axis and ×8 in the temporal axis. 
             “Average” refers to metrics calculated across all 8 interpolated frames, 
             while “Center” refers to metrics measured using 1st, 4th and 9th (that is single-frame interpolation) frames of the interpolated sequence. 
@@ -329,9 +329,9 @@
         <div class="content has-text-justified">
           <p>
             Performance comparison on the C-STVSR baselines for out-of-distribution scale on Gopro dataset. 
-            Results are evaluated using PSNR (dB) and SSIM metrics. 
+            L<sub>RAFT</sub> refers the optical flow supervision. Results are evaluated using PSNR (dB) and SSIM metrics. 
             All frames are interpolated by a scaling factor specified on the table and metrics calculated across all interpolated frames. 
-            Bold indicates the best performance.
+            Red and blue indicate the best and the second best performance, respectively.
           </p>
         </div>
         <div class="columns is-vcentered interpolation-panel">
